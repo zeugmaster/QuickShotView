@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A386FB2416FC82E3008807AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2316FC82E3008807AF /* UIKit.framework */; };
+		A386FB2616FC82E3008807AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2516FC82E3008807AF /* Foundation.framework */; };
+		A386FB2816FC82E3008807AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2716FC82E3008807AF /* CoreGraphics.framework */; };
+		A386FB2E16FC82E3008807AF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A386FB2C16FC82E3008807AF /* InfoPlist.strings */; };
+		A386FB3016FC82E3008807AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A386FB2F16FC82E3008807AF /* main.m */; };
+		A386FB3416FC82E3008807AF /* BYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A386FB3316FC82E3008807AF /* BYAppDelegate.m */; };
+		A386FB3616FC82E4008807AF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3516FC82E4008807AF /* Default.png */; };
+		A386FB3816FC82E4008807AF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3716FC82E4008807AF /* Default@2x.png */; };
+		A386FB3A16FC82E4008807AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3916FC82E4008807AF /* Default-568h@2x.png */; };
+		A386FB3D16FC82E4008807AF /* BYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A386FB3C16FC82E4008807AF /* BYViewController.m */; };
+		A386FB4016FC82E4008807AF /* BYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3E16FC82E4008807AF /* BYViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A386FB2016FC82E3008807AF /* QuickShotView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickShotView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A386FB2316FC82E3008807AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A386FB2516FC82E3008807AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A386FB2716FC82E3008807AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A386FB2B16FC82E3008807AF /* QuickShotView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "QuickShotView-Info.plist"; sourceTree = "<group>"; };
+		A386FB2D16FC82E3008807AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A386FB2F16FC82E3008807AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A386FB3116FC82E3008807AF /* QuickShotView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QuickShotView-Prefix.pch"; sourceTree = "<group>"; };
+		A386FB3216FC82E3008807AF /* BYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYAppDelegate.h; sourceTree = "<group>"; };
+		A386FB3316FC82E3008807AF /* BYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYAppDelegate.m; sourceTree = "<group>"; };
+		A386FB3516FC82E4008807AF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A386FB3716FC82E4008807AF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A386FB3916FC82E4008807AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A386FB3B16FC82E4008807AF /* BYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYViewController.h; sourceTree = "<group>"; };
+		A386FB3C16FC82E4008807AF /* BYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYViewController.m; sourceTree = "<group>"; };
+		A386FB3F16FC82E4008807AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BYViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A386FB1D16FC82E3008807AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A386FB2416FC82E3008807AF /* UIKit.framework in Frameworks */,
+				A386FB2616FC82E3008807AF /* Foundation.framework in Frameworks */,
+				A386FB2816FC82E3008807AF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A386FB1716FC82E3008807AF = {
+			isa = PBXGroup;
+			children = (
+				A386FB2916FC82E3008807AF /* QuickShotView */,
+				A386FB2216FC82E3008807AF /* Frameworks */,
+				A386FB2116FC82E3008807AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A386FB2116FC82E3008807AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A386FB2016FC82E3008807AF /* QuickShotView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A386FB2216FC82E3008807AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A386FB2316FC82E3008807AF /* UIKit.framework */,
+				A386FB2516FC82E3008807AF /* Foundation.framework */,
+				A386FB2716FC82E3008807AF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A386FB2916FC82E3008807AF /* QuickShotView */ = {
+			isa = PBXGroup;
+			children = (
+				A386FB3216FC82E3008807AF /* BYAppDelegate.h */,
+				A386FB3316FC82E3008807AF /* BYAppDelegate.m */,
+				A386FB3B16FC82E4008807AF /* BYViewController.h */,
+				A386FB3C16FC82E4008807AF /* BYViewController.m */,
+				A386FB3E16FC82E4008807AF /* BYViewController.xib */,
+				A386FB2A16FC82E3008807AF /* Supporting Files */,
+			);
+			path = QuickShotView;
+			sourceTree = "<group>";
+		};
+		A386FB2A16FC82E3008807AF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A386FB2B16FC82E3008807AF /* QuickShotView-Info.plist */,
+				A386FB2C16FC82E3008807AF /* InfoPlist.strings */,
+				A386FB2F16FC82E3008807AF /* main.m */,
+				A386FB3116FC82E3008807AF /* QuickShotView-Prefix.pch */,
+				A386FB3516FC82E4008807AF /* Default.png */,
+				A386FB3716FC82E4008807AF /* Default@2x.png */,
+				A386FB3916FC82E4008807AF /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A386FB1F16FC82E3008807AF /* QuickShotView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A386FB4316FC82E4008807AF /* Build configuration list for PBXNativeTarget "QuickShotView" */;
+			buildPhases = (
+				A386FB1C16FC82E3008807AF /* Sources */,
+				A386FB1D16FC82E3008807AF /* Frameworks */,
+				A386FB1E16FC82E3008807AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickShotView;
+			productName = QuickShotView;
+			productReference = A386FB2016FC82E3008807AF /* QuickShotView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A386FB1816FC82E3008807AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BY;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Bytolution;
+			};
+			buildConfigurationList = A386FB1B16FC82E3008807AF /* Build configuration list for PBXProject "QuickShotView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A386FB1716FC82E3008807AF;
+			productRefGroup = A386FB2116FC82E3008807AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A386FB1F16FC82E3008807AF /* QuickShotView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A386FB1E16FC82E3008807AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A386FB2E16FC82E3008807AF /* InfoPlist.strings in Resources */,
+				A386FB3616FC82E4008807AF /* Default.png in Resources */,
+				A386FB3816FC82E4008807AF /* Default@2x.png in Resources */,
+				A386FB3A16FC82E4008807AF /* Default-568h@2x.png in Resources */,
+				A386FB4016FC82E4008807AF /* BYViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A386FB1C16FC82E3008807AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A386FB3016FC82E3008807AF /* main.m in Sources */,
+				A386FB3416FC82E3008807AF /* BYAppDelegate.m in Sources */,
+				A386FB3D16FC82E4008807AF /* BYViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A386FB2C16FC82E3008807AF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A386FB2D16FC82E3008807AF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A386FB3E16FC82E4008807AF /* BYViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A386FB3F16FC82E4008807AF /* en */,
+			);
+			name = BYViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A386FB4116FC82E4008807AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A386FB4216FC82E4008807AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A386FB4416FC82E4008807AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuickShotView/QuickShotView-Prefix.pch";
+				INFOPLIST_FILE = "QuickShotView/QuickShotView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A386FB4516FC82E4008807AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "QuickShotView/QuickShotView-Prefix.pch";
+				INFOPLIST_FILE = "QuickShotView/QuickShotView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A386FB1B16FC82E3008807AF /* Build configuration list for PBXProject "QuickShotView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A386FB4116FC82E4008807AF /* Debug */,
+				A386FB4216FC82E4008807AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A386FB4316FC82E4008807AF /* Build configuration list for PBXNativeTarget "QuickShotView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A386FB4416FC82E4008807AF /* Debug */,
+				A386FB4516FC82E4008807AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A386FB1816FC82E3008807AF /* Project object */;
+}
