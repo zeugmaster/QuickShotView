@@ -17,7 +17,6 @@
 		A386FB3816FC82E4008807AF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3716FC82E4008807AF /* Default@2x.png */; };
 		A386FB3A16FC82E4008807AF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3916FC82E4008807AF /* Default-568h@2x.png */; };
 		A386FB3D16FC82E4008807AF /* BYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A386FB3C16FC82E4008807AF /* BYViewController.m */; };
-		A386FB4016FC82E4008807AF /* BYViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A386FB3E16FC82E4008807AF /* BYViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +35,6 @@
 		A386FB3916FC82E4008807AF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A386FB3B16FC82E4008807AF /* BYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BYViewController.h; sourceTree = "<group>"; };
 		A386FB3C16FC82E4008807AF /* BYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BYViewController.m; sourceTree = "<group>"; };
-		A386FB3F16FC82E4008807AF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BYViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,6 @@
 				A386FB3316FC82E3008807AF /* BYAppDelegate.m */,
 				A386FB3B16FC82E4008807AF /* BYViewController.h */,
 				A386FB3C16FC82E4008807AF /* BYViewController.m */,
-				A386FB3E16FC82E4008807AF /* BYViewController.xib */,
 				A386FB2A16FC82E3008807AF /* Supporting Files */,
 			);
 			path = QuickShotView;
@@ -163,7 +160,6 @@
 				A386FB3616FC82E4008807AF /* Default.png in Resources */,
 				A386FB3816FC82E4008807AF /* Default@2x.png in Resources */,
 				A386FB3A16FC82E4008807AF /* Default-568h@2x.png in Resources */,
-				A386FB4016FC82E4008807AF /* BYViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,14 +185,6 @@
 				A386FB2D16FC82E3008807AF /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A386FB3E16FC82E4008807AF /* BYViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A386FB3F16FC82E4008807AF /* en */,
-			);
-			name = BYViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
