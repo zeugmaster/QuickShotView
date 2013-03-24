@@ -7,17 +7,35 @@
 //
 
 #import "BYViewController.h"
+#import "BYQuickShotView.h"
 
 @interface BYViewController ()
+
+@property (nonatomic, strong) BYQuickShotView *quickShotView;
 
 @end
 
 @implementation BYViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.quickShotView = [[BYQuickShotView alloc]init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.quickShotView.frame = CGRectMake(30, 50, 260, 260);
+    
+    [self.view addSubview:self.quickShotView];
+    
 }
 
 - (void)didReceiveMemoryWarning
