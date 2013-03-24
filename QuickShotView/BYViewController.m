@@ -33,9 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.quickShotView.frame = CGRectMake(30, 50, 260, 260);
-    
     [self.view addSubview:self.quickShotView];
-    
 }
 
 - (void)didReceiveMemoryWarning

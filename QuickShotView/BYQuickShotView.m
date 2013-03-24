@@ -27,7 +27,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureDeviceBecameAvailible:) name:AVCaptureDeviceWasConnectedNotification object:nil];
         [self prepareSession];
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -53,7 +52,6 @@
     AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.rearCamera error:nil];
     
 	
-    // Setup the still image file output
     AVCaptureStillImageOutput *newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
@@ -61,11 +59,9 @@
     [newStillImageOutput setOutputSettings:outputSettings];
     
     
-    // Create session (use default AVCaptureSessionPresetHigh)
     AVCaptureSession *newCaptureSession = [[AVCaptureSession alloc] init];
     
     
-    // Add inputs and output to the capture session
     if ([newCaptureSession canAddInput:newVideoInput]) {
         [newCaptureSession addInput:newVideoInput];
     }
