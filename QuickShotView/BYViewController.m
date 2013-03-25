@@ -32,7 +32,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.quickShotView.frame = CGRectMake(30, 50, 260, 260);
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.quickShotView.frame = CGRectMake(0, 0, 260, 260);
+    self.quickShotView.center = self.view.center;
     [self.view addSubview:self.quickShotView];
 }
 

@@ -8,6 +8,7 @@
 
 #import "BYQuickShotView.h"
 #import <CoreMedia/CoreMedia.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface BYQuickShotView ()
 
@@ -27,7 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self prepareSession];
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -79,8 +80,10 @@
 - (void)didMoveToSuperview {
     AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
     prevLayer.frame = self.bounds;
+
     self.layer.masksToBounds = YES;
     prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    prevLayer.cornerRadius = 10;
     [self.layer insertSublayer:prevLayer atIndex:0];
 }
 
@@ -96,7 +99,6 @@
 			}
 		}
 	}
-        
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                        completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                            UIImage *capturedImage;
@@ -115,6 +117,5 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self captureImage];
 }
-
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36595071700BC1900E13C37 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A36595061700BC1900E13C37 /* QuartzCore.framework */; };
 		A386FB2416FC82E3008807AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2316FC82E3008807AF /* UIKit.framework */; };
 		A386FB2616FC82E3008807AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2516FC82E3008807AF /* Foundation.framework */; };
 		A386FB2816FC82E3008807AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB2716FC82E3008807AF /* CoreGraphics.framework */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A36595061700BC1900E13C37 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A386FB2016FC82E3008807AF /* QuickShotView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickShotView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A386FB2316FC82E3008807AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A386FB2516FC82E3008807AF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A36595071700BC1900E13C37 /* QuartzCore.framework in Frameworks */,
 				A3CCD83616FE442300CCC3A6 /* CoreMedia.framework in Frameworks */,
 				A386FB4D16FC8514008807AF /* AVFoundation.framework in Frameworks */,
 				A386FB2416FC82E3008807AF /* UIKit.framework in Frameworks */,
@@ -80,6 +83,7 @@
 		A386FB2216FC82E3008807AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A36595061700BC1900E13C37 /* QuartzCore.framework */,
 				A3CCD83516FE442300CCC3A6 /* CoreMedia.framework */,
 				A386FB4C16FC8514008807AF /* AVFoundation.framework */,
 				A386FB2316FC82E3008807AF /* UIKit.framework */,
