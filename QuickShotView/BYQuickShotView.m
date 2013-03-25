@@ -15,11 +15,15 @@
 - (void)prepareSession;
 - (AVCaptureDevice*)rearCamera;
 - (void)captureImage;
+- (CGRect)previewLayerFrame;
 
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
 
 @end
+
+#define PREVIEW_LAYER_INSET 8
+#define PREVIEW_LAYER_EDGE_RADIUS 10
 
 @implementation BYQuickShotView
 
@@ -46,6 +50,17 @@
         }
     }
     return captureDevice;
+}
+
+- (CGRect)previewLayerFrame {
+    CGRect layerFrame = self.bounds;
+    
+    layerFrame.origin.x += PREVIEW_LAYER_INSET;
+    layerFrame.origin.y += PREVIEW_LAYER_INSET;
+    layerFrame.size.width -= PREVIEW_LAYER_INSET * 2;
+    layerFrame.size.height -= PREVIEW_LAYER_INSET * 2;
+    
+    return layerFrame;
 }
 
 - (void)prepareSession
@@ -79,8 +94,9 @@
 
 - (void)didMoveToSuperview {
     AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
-    prevLayer.frame = self.bounds;
-
+    
+    prevLayer.frame = self.previewLayerFrame;
+    
     self.layer.masksToBounds = YES;
     prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     prevLayer.cornerRadius = 10;
@@ -90,6 +106,7 @@
 - (void)captureImage
 {
     //Before we can take a snapshot, we need to determine the specific connection to be used
+    
     NSArray *connections = [self.stillImageOutput connections];
     AVCaptureConnection *stillImageConnection;
     for ( AVCaptureConnection *connection in connections ) {
@@ -99,6 +116,7 @@
 			}
 		}
 	}
+    
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                        completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                            UIImage *capturedImage;
@@ -116,6 +134,22 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self captureImage];
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef c = UIGraphicsGetCurrentContext();
+    CGFloat minx = CGRectGetMinX(self.previewLayerFrame), midx = CGRectGetMidX(self.previewLayerFrame), maxx = CGRectGetMaxX(self.previewLayerFrame);
+    CGFloat miny = CGRectGetMinY(self.previewLayerFrame), midy = CGRectGetMidY(self.previewLayerFrame), maxy = CGRectGetMaxY(self.previewLayerFrame);
+    CGContextMoveToPoint(c, minx, midy);
+    CGContextAddArcToPoint(c, minx, miny, midx, miny, PREVIEW_LAYER_EDGE_RADIUS);
+    CGContextAddArcToPoint(c, maxx, miny, maxx, midy, PREVIEW_LAYER_EDGE_RADIUS);
+    CGContextAddArcToPoint(c, maxx, maxy, midx, maxy, PREVIEW_LAYER_EDGE_RADIUS);
+    CGContextAddArcToPoint(c, minx, maxy, minx, midy, PREVIEW_LAYER_EDGE_RADIUS);
+    CGContextClosePath(c);
+    CGContextSetShadow(c, CGSizeMake(0, 0), 6);
+    CGContextSetLineWidth(c, 4);
+    CGContextSetStrokeColorWithColor(c, [[UIColor whiteColor] CGColor]);
+    CGContextDrawPath(c, kCGPathFillStroke);
 }
 
 @end
