@@ -12,7 +12,6 @@
 @interface BYQuickShotView ()
 
 - (void)prepareSession;
-- (void)captureDeviceBecameAvailible:(NSNotification*)notification;
 - (AVCaptureDevice*)rearCamera;
 - (void)captureImage;
 
@@ -33,10 +32,11 @@
     return self;
 }
 
+//This method returns the AVCaptureDevice we want to use as an input for our AVCaptureSession
+
 - (AVCaptureDevice *)rearCamera {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSArray *videoDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    AVCaptureDevice *captureDevice = nil;
+    AVCaptureDevice *captureDevice;
     for (AVCaptureDevice *device in videoDevices)
     {
         if (device.position == AVCaptureDevicePositionBack)
@@ -47,11 +47,10 @@
     return captureDevice;
 }
 
-- (void)prepareSession {
-
+- (void)prepareSession
+{
     AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.rearCamera error:nil];
     
-	
     AVCaptureStillImageOutput *newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
@@ -73,7 +72,6 @@
     self.captureSession = newCaptureSession;
     
     [self.captureSession startRunning];
-
     
     NSLog(@"%@", self.captureSession);
 }
@@ -81,7 +79,6 @@
 - (void)didMoveToSuperview {
     AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
     prevLayer.frame = self.bounds;
-    NSLog(@"%@", prevLayer);
     self.layer.masksToBounds = YES;
     prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self.layer insertSublayer:prevLayer atIndex:0];
@@ -89,7 +86,7 @@
 
 - (void)captureImage
 {
-    
+    //Before we can take a snapshot, we need to determine the specific connection to be used
     NSArray *connections = [self.stillImageOutput connections];
     AVCaptureConnection *stillImageConnection;
     for ( AVCaptureConnection *connection in connections ) {
@@ -99,14 +96,14 @@
 			}
 		}
 	}
-    
-    NSLog(@"%@, %@", stillImageConnection, self.stillImageOutput);
-    
+        
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillImageConnection
                                                        completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                            UIImage *capturedImage;
                                                            if (imageDataSampleBuffer != NULL) {
-                                                           NSData *imgData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                               // as for now we only save the image to the camera roll, but for reusability we should consider implementing a protocol
+                                                               // that returns the image to the object using this view
+                                                               NSData *imgData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                                                                capturedImage = [UIImage imageWithData:imgData];
                                                                UIImageWriteToSavedPhotosAlbum(capturedImage, nil, nil, nil);
                                                             }
@@ -116,9 +113,7 @@
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self captureImage];
-    
 }
 
 
