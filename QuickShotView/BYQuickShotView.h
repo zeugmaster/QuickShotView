@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface BYQuickShotView : UIView
+@interface BYQuickShotView : UIView 
+
+
 
 @end

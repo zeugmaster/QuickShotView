@@ -16,14 +16,22 @@
 - (AVCaptureDevice*)rearCamera;
 - (void)captureImage;
 - (CGRect)previewLayerFrame;
+- (UIImage*)cropImage:(UIImage*)imageToCrop;
+- (void)buttonPressed;
+- (CGRect)buttonFrame;
 
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
+@property (nonatomic, strong) UIView *overlayView;
+@property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UIImage *currentImage;
+@property (nonatomic, strong) UIImageView *imagePreView;
 
 @end
 
 #define PREVIEW_LAYER_INSET 8
 #define PREVIEW_LAYER_EDGE_RADIUS 10
+#define BUTTON_SIZE 50
 
 @implementation BYQuickShotView
 
@@ -35,6 +43,43 @@
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
+}
+
+- (UIButton *)button {
+    if (!_button)  {
+        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _button.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
+        _button.layer.masksToBounds = YES;
+        _button.layer.cornerRadius = 5;
+        _button.frame = CGRectMake((self.bounds.size.width/2) - (BUTTON_SIZE/2), self.bounds.size.height-(BUTTON_SIZE+20), BUTTON_SIZE, BUTTON_SIZE);
+        [_button setImage:[UIImage imageNamed:@"cam.png"] forState:UIControlStateNormal];
+        [_button addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _button;
+}
+
+- (UIImageView *)imagePreView
+{
+    if (!_imagePreView) {
+        _imagePreView = [[UIImageView alloc]init];
+        _imagePreView.layer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
+        _imagePreView.layer.masksToBounds = YES;
+        _imagePreView.frame = self.previewLayerFrame;
+        [self insertSubview:_imagePreView belowSubview:self.button];
+    }
+    return _imagePreView;
+}
+
+- (CGRect)previewLayerFrame
+{
+    CGRect layerFrame = self.bounds;
+    
+    layerFrame.origin.x += PREVIEW_LAYER_INSET;
+    layerFrame.origin.y += PREVIEW_LAYER_INSET;
+    layerFrame.size.width -= PREVIEW_LAYER_INSET * 2;
+    layerFrame.size.height -= PREVIEW_LAYER_INSET * 2;
+    
+    return layerFrame;
 }
 
 //This method returns the AVCaptureDevice we want to use as an input for our AVCaptureSession
@@ -52,16 +97,10 @@
     return captureDevice;
 }
 
-- (CGRect)previewLayerFrame {
-    CGRect layerFrame = self.bounds;
-    
-    layerFrame.origin.x += PREVIEW_LAYER_INSET;
-    layerFrame.origin.y += PREVIEW_LAYER_INSET;
-    layerFrame.size.width -= PREVIEW_LAYER_INSET * 2;
-    layerFrame.size.height -= PREVIEW_LAYER_INSET * 2;
-    
-    return layerFrame;
-}
+// if we want to add a shadow without drawing out of bounds we have to slightly resize the AVCaptureVideoPreviewLayer
+// and this method returns trhe frame we need to achieve this
+
+
 
 - (void)prepareSession
 {
@@ -73,9 +112,7 @@
                                     nil];
     [newStillImageOutput setOutputSettings:outputSettings];
     
-    
     AVCaptureSession *newCaptureSession = [[AVCaptureSession alloc] init];
-    
     
     if ([newCaptureSession canAddInput:newVideoInput]) {
         [newCaptureSession addInput:newVideoInput];
@@ -92,15 +129,15 @@
     NSLog(@"%@", self.captureSession);
 }
 
-- (void)didMoveToSuperview {
+- (void)didMoveToSuperview
+{
     AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
-    
     prevLayer.frame = self.previewLayerFrame;
-    
-    self.layer.masksToBounds = YES;
+    prevLayer.masksToBounds = YES;
     prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    prevLayer.cornerRadius = 10;
+    prevLayer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
     [self.layer insertSublayer:prevLayer atIndex:0];
+    [self addSubview:self.button];
 }
 
 - (void)captureImage
@@ -125,15 +162,42 @@
                                                                // that returns the image to the object using this view
                                                                NSData *imgData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                                                                capturedImage = [UIImage imageWithData:imgData];
-                                                               UIImageWriteToSavedPhotosAlbum(capturedImage, nil, nil, nil);
                                                             }
-                                                           NSLog(@"captured image: %@", capturedImage);
-                                                       }];
+                                                           UIImage *croppedImg = [self cropImage:capturedImage];
+                                                           self.imagePreView.image = croppedImg;
+                                                           self.currentImage = croppedImg;
+                                                        }];
 }
 
+- (void)buttonPressed
+{
+    if (!self.currentImage) {
+        [self captureImage];
+        [_button setImage:[UIImage imageNamed:@"trash.png"] forState:UIControlStateNormal];
+    } else {
+        self.imagePreView.image = nil;
+        self.currentImage = nil;
+        [_button setImage:[UIImage imageNamed:@"cam.png"] forState:UIControlStateNormal];
+    }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self captureImage];
+}
+
+- (UIImage *)cropImage:(UIImage *)imageToCrop {
+    CGSize size = [imageToCrop size];
+    int padding = 0;
+    int pictureSize;
+    int startCroppingPosition;
+    if (size.height > size.width) {
+        pictureSize = size.width - (2.0 * padding);
+        startCroppingPosition = (size.height - pictureSize) / 2.0;
+    } else {
+        pictureSize = size.height - (2.0 * padding);
+        startCroppingPosition = (size.width - pictureSize) / 2.0;
+    }
+    CGRect cropRect = CGRectMake(startCroppingPosition, padding, pictureSize, pictureSize);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], cropRect);
+    UIImage *newImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:imageToCrop.imageOrientation];
+    return newImage;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -144,7 +208,7 @@
     CGContextAddArcToPoint(c, minx, miny, midx, miny, PREVIEW_LAYER_EDGE_RADIUS);
     CGContextAddArcToPoint(c, maxx, miny, maxx, midy, PREVIEW_LAYER_EDGE_RADIUS);
     CGContextAddArcToPoint(c, maxx, maxy, midx, maxy, PREVIEW_LAYER_EDGE_RADIUS);
-    CGContextAddArcToPoint(c, minx, maxy, minx, midy, PREVIEW_LAYER_EDGE_RADIUS);
+    CGContextAddArcToPoint(c, minx, maxy, minx, midy, PREVIEW_LAYER_EDGE_RADIUS); 
     CGContextClosePath(c);
     CGContextSetShadow(c, CGSizeMake(0, 0), 6);
     CGContextSetLineWidth(c, 4);

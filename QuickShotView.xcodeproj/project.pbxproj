@@ -22,6 +22,8 @@
 		A386FB4B16FC841C008807AF /* BYQuickShotView.m in Sources */ = {isa = PBXBuildFile; fileRef = A386FB4A16FC841C008807AF /* BYQuickShotView.m */; };
 		A386FB4D16FC8514008807AF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386FB4C16FC8514008807AF /* AVFoundation.framework */; };
 		A3CCD83616FE442300CCC3A6 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CCD83516FE442300CCC3A6 /* CoreMedia.framework */; };
+		A3D95B3117022783009E804A /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D95B2F17022783009E804A /* cam.png */; };
+		A3D95B3217022783009E804A /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D95B3017022783009E804A /* trash.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		A386FB4A16FC841C008807AF /* BYQuickShotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYQuickShotView.m; sourceTree = "<group>"; };
 		A386FB4C16FC8514008807AF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A3CCD83516FE442300CCC3A6 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		A3D95B2F17022783009E804A /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
+		A3D95B3017022783009E804A /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 		A386FB2A16FC82E3008807AF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3D95B2F17022783009E804A /* cam.png */,
+				A3D95B3017022783009E804A /* trash.png */,
 				A386FB2B16FC82E3008807AF /* QuickShotView-Info.plist */,
 				A386FB2C16FC82E3008807AF /* InfoPlist.strings */,
 				A386FB2F16FC82E3008807AF /* main.m */,
@@ -181,6 +187,8 @@
 				A386FB3616FC82E4008807AF /* Default.png in Resources */,
 				A386FB3816FC82E4008807AF /* Default@2x.png in Resources */,
 				A386FB3A16FC82E4008807AF /* Default-568h@2x.png in Resources */,
+				A3D95B3117022783009E804A /* cam.png in Resources */,
+				A3D95B3217022783009E804A /* trash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
