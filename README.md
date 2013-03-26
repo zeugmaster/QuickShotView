@@ -5,4 +5,4 @@ A simple UIView that uses AVFoundation to take snapshots with the iOS device's c
 
 Here's  what it looks like: 
 
-[A](http://bytolution.com/qsv.png)
+![A](http://bytolution.com/qsv.png)
