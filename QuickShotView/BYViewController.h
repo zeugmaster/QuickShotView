@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BYQuickShotView.h"
 
-@interface BYViewController : UIViewController
+@interface BYViewController : UIViewController <BYQuickShotViewDelegate>
 
 
 

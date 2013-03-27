@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+@protocol BYQuickShotViewDelegate <NSObject>
+
+- (void)didTakeSnapshot:(UIImage*)img;
+- (void)didDiscardLastImage;
+
+@end
+
 @interface BYQuickShotView : UIView 
 
-
+@property (nonatomic, strong) id <BYQuickShotViewDelegate> delegate;
 
 @end

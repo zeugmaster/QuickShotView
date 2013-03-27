@@ -17,14 +17,10 @@
 - (void)captureImage;
 - (CGRect)previewLayerFrame;
 - (UIImage*)cropImage:(UIImage*)imageToCrop;
-- (void)buttonPressed;
-- (CGRect)buttonFrame;
+- (void)animateFlash;
 
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
-@property (nonatomic, strong) UIView *overlayView;
-@property (nonatomic, strong) UIButton *button;
-@property (nonatomic, strong) UIImage *currentImage;
 @property (nonatomic, strong) UIImageView *imagePreView;
 
 @end
@@ -45,27 +41,16 @@
     return self;
 }
 
-- (UIButton *)button {
-    if (!_button)  {
-        _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        _button.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
-        _button.layer.masksToBounds = YES;
-        _button.layer.cornerRadius = 5;
-        _button.frame = CGRectMake((self.bounds.size.width/2) - (BUTTON_SIZE/2), self.bounds.size.height-(BUTTON_SIZE+20), BUTTON_SIZE, BUTTON_SIZE);
-        [_button setImage:[UIImage imageNamed:@"cam.png"] forState:UIControlStateNormal];
-        [_button addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _button;
-}
-
 - (UIImageView *)imagePreView
 {
     if (!_imagePreView) {
         _imagePreView = [[UIImageView alloc]init];
-        _imagePreView.layer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
+        _imagePreView.layer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS - 1;
         _imagePreView.layer.masksToBounds = YES;
         _imagePreView.frame = self.previewLayerFrame;
-        [self insertSubview:_imagePreView belowSubview:self.button];
+        _imagePreView.userInteractionEnabled = NO;
+        _imagePreView.backgroundColor = [UIColor clearColor];
+        [self addSubview:_imagePreView];
     }
     return _imagePreView;
 }
@@ -137,7 +122,6 @@
     prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     prevLayer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
     [self.layer insertSublayer:prevLayer atIndex:0];
-    [self addSubview:self.button];
 }
 
 - (void)captureImage
@@ -165,21 +149,32 @@
                                                             }
                                                            UIImage *croppedImg = [self cropImage:capturedImage];
                                                            self.imagePreView.image = croppedImg;
-                                                           self.currentImage = croppedImg;
+                                                           [self.delegate didTakeSnapshot:croppedImg];
+                                                           [self animateFlash];
                                                         }];
 }
 
-- (void)buttonPressed
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!self.currentImage) {
+    if (!self.imagePreView.image) {
         [self captureImage];
-        [_button setImage:[UIImage imageNamed:@"trash.png"] forState:UIControlStateNormal];
     } else {
+        [self.delegate didDiscardLastImage];
         self.imagePreView.image = nil;
-        self.currentImage = nil;
-        [_button setImage:[UIImage imageNamed:@"cam.png"] forState:UIControlStateNormal];
     }
+}
 
+- (void)animateFlash {
+    UIView *flashView = [[UIView alloc]initWithFrame:self.previewLayerFrame];
+    flashView.backgroundColor = [UIColor whiteColor];
+    flashView.layer.masksToBounds = YES;
+    flashView.layer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
+    [self addSubview:flashView];
+    [UIView animateWithDuration:0.2 delay:0.1 options:kNilOptions animations:^{
+        flashView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [flashView removeFromSuperview];
+    }];
 }
 
 - (UIImage *)cropImage:(UIImage *)imageToCrop {
