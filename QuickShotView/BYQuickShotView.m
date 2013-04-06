@@ -89,8 +89,14 @@
 
 - (void)prepareSession
 {
-    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.rearCamera error:nil];
     
+    NSLog(@"%@", self.captureSession);
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    //capture session setup
+    AVCaptureDeviceInput *newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.rearCamera error:nil];
     AVCaptureStillImageOutput *newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                     AVVideoCodecJPEG, AVVideoCodecKey,
@@ -102,26 +108,26 @@
     if ([newCaptureSession canAddInput:newVideoInput]) {
         [newCaptureSession addInput:newVideoInput];
     }
+    
     if ([newCaptureSession canAddOutput:newStillImageOutput]) {
         [newCaptureSession addOutput:newStillImageOutput];
+        self.stillImageOutput = newStillImageOutput;
+        self.captureSession = newCaptureSession;
     }
-    
-    self.stillImageOutput = newStillImageOutput;
-    self.captureSession = newCaptureSession;
-    
-    [self.captureSession startRunning];
-    
-    NSLog(@"%@", self.captureSession);
-}
-
-- (void)didMoveToSuperview
-{
-    AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
-    prevLayer.frame = self.previewLayerFrame;
-    prevLayer.masksToBounds = YES;
-    prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    prevLayer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
-    [self.layer insertSublayer:prevLayer atIndex:0];
+    // -startRunning will only return when the session started (-> the camera is then ready)
+    dispatch_queue_t layerQ = dispatch_queue_create("layerQ", NULL);
+    dispatch_async(layerQ, ^{
+        [self.captureSession startRunning];
+        AVCaptureVideoPreviewLayer *prevLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.captureSession];
+        prevLayer.frame = self.previewLayerFrame;
+        prevLayer.masksToBounds = YES;
+        prevLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        prevLayer.cornerRadius = PREVIEW_LAYER_EDGE_RADIUS;
+        //to make sure were not modifying the UI on a thread other than the main thread, use dispatch_async w/ dispatch_get_main_queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.layer insertSublayer:prevLayer atIndex:0];
+        });
+    });
 }
 
 - (void)captureImage
