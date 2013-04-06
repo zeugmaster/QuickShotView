@@ -127,7 +127,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.layer insertSublayer:prevLayer atIndex:0];
         });
-    });
+    }); 
 }
 
 - (void)captureImage
